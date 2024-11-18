@@ -6,13 +6,13 @@
 /*   By: rafael <rafael@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:32:45 by rafael            #+#    #+#             */
-/*   Updated: 2024/11/18 11:51:42 by rafael           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:21:53 by rafael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strchr(const char *s, int c)
+int	ft_strchrm(const char *s, int c)
 {
 	int	i;
 
@@ -69,12 +69,12 @@ char	*ft_joinmod(char *line, char *buffer)
 	}
 	aux = malloc((ft_strlen(line) + ft_strlen(buffer) + 1) * sizeof(char));
 	ft_strlcpy(aux, line, ft_strlen(line) + 1);
-	if (buffer[ft_strchr(buffer, '\n')] == '\n')
-		ft_strlcpy(aux + ft_strlen(line), buffer, ft_strchr(buffer, '\n') + 2);
+	if (buffer[ft_strchrm(buffer, '\n')] == '\n')
+		ft_strlcpy(aux + ft_strlen(line), buffer, ft_strchrm(buffer, '\n') + 2);
 	else
 		ft_strlcpy(aux + ft_strlen(line), buffer, ft_strlen(buffer) + 1);
 	free(line);
-	pos = ft_strchr(buffer, '\n');
+	pos = ft_strchrm(buffer, '\n');
 	if (buffer[pos] == '\n')
 		ft_strlcpy(buffer, (buffer + pos + 1), ft_strlen(buffer) - pos + 1);
 	else

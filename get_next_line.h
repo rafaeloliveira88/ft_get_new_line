@@ -6,7 +6,7 @@
 /*   By: rafael <rafael@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:06:49 by rafael            #+#    #+#             */
-/*   Updated: 2024/11/18 11:36:10 by rafael           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:21:21 by rafael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
-int		ft_strchr(const char *s, int c);
+int		ft_strchrm(const char *s, int c);
 char	*get_next_line(int fd);
 char	*ft_joinmod(char *line, char *buffer);
 
