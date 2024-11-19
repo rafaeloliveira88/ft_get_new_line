@@ -6,7 +6,7 @@
 /*   By: rafael <rafael@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:32:45 by rafael            #+#    #+#             */
-/*   Updated: 2024/11/19 23:46:49 by rafael           ###   ########.fr       */
+/*   Updated: 2024/11/19 23:57:18 by rafael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,9 @@ size_t	ft_strlen(const char *s)
 char	*ft_joinmod(char *line, char *buf, size_t s_line)
 {
 	char	*aux;
-	size_t	aux_len;
+	size_t	pos;
 	size_t	i;
 
-	aux_len = 0;
 	aux = (char *)malloc(sizeof(char) * (s_line) + getendposline(buf) + 1);
 	i = -1;
 	while (++i < s_line)
@@ -59,10 +58,10 @@ char	*ft_joinmod(char *line, char *buf, size_t s_line)
 		aux[i] = '\n';
 	aux[s_line + getendposline(buf)] = '\0';
 	i = -1;
-	aux_len = getendposline(buf);
-	while (++i < (ft_strlen(buf) - aux_len))
-		buf[i] = buf[aux_len + i];
-	buf[ft_strlen(buf) - aux_len] = '\0';
+	pos = getendposline(buf);
+	while (++i < (ft_strlen(buf) - pos))
+		buf[i] = buf[pos + i];
+	buf[ft_strlen(buf) - pos] = '\0';
 	if (ft_strlen(aux) > 0 && aux[ft_strlen(aux) - 1] != '\n')
 		*buf = '\0';
 	if (line)
