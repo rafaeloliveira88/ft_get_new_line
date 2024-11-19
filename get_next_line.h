@@ -6,7 +6,7 @@
 /*   By: rafael <rafael@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:06:49 by rafael            #+#    #+#             */
-/*   Updated: 2024/11/18 13:21:21 by rafael           ###   ########.fr       */
+/*   Updated: 2024/11/19 23:45:31 by rafael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 42
 # endif
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+int		getendposline(char *str);
 size_t	ft_strlen(const char *s);
-int		ft_strchrm(const char *s, int c);
 char	*get_next_line(int fd);
-char	*ft_joinmod(char *line, char *buffer);
+char	*ft_joinmod(char *line, char *buffer, size_t s_line);
 
 #endif

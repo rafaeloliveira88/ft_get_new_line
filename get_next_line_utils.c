@@ -6,40 +6,24 @@
 /*   By: rafael <rafael@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:32:45 by rafael            #+#    #+#             */
-/*   Updated: 2024/11/18 13:21:53 by rafael           ###   ########.fr       */
+/*   Updated: 2024/11/19 23:46:49 by rafael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strchrm(const char *s, int c)
+int	getendposline(char *str)
 {
 	int	i;
 
-	if ((char)c == 0)
-		return (ft_strlen(s) - 1);
 	i = 0;
-	while (s[i] && s[i] != (unsigned char)c)
+	if (!str)
+		return (-1);
+	while (str[i] && str[i] != '\n')
 		i++;
-	if (s[i])
-		return (i);
-	return (0);
-}
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
-{
-	size_t	i;
-
-	if (dest == NULL || size == 0)
-		return (ft_strlen(src));
-	i = 0;
-	while (src[i] && i < (size - 1))
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (ft_strlen(src));
+	if (str[i] != '\n')
+		return (ft_strlen(str));
+	return (++i);
 }
 
 /*
@@ -57,27 +41,31 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_joinmod(char *line, char *buffer)
+char	*ft_joinmod(char *line, char *buf, size_t s_line)
 {
 	char	*aux;
-	int		pos;
+	size_t	aux_len;
+	size_t	i;
 
-	if (line == NULL)
-	{
-		line = (char *)malloc(sizeof(char));
-		*line = '\0';
-	}
-	aux = malloc((ft_strlen(line) + ft_strlen(buffer) + 1) * sizeof(char));
-	ft_strlcpy(aux, line, ft_strlen(line) + 1);
-	if (buffer[ft_strchrm(buffer, '\n')] == '\n')
-		ft_strlcpy(aux + ft_strlen(line), buffer, ft_strchrm(buffer, '\n') + 2);
-	else
-		ft_strlcpy(aux + ft_strlen(line), buffer, ft_strlen(buffer) + 1);
-	free(line);
-	pos = ft_strchrm(buffer, '\n');
-	if (buffer[pos] == '\n')
-		ft_strlcpy(buffer, (buffer + pos + 1), ft_strlen(buffer) - pos + 1);
-	else
-		*buffer = '\0';
+	aux_len = 0;
+	aux = (char *)malloc(sizeof(char) * (s_line) + getendposline(buf) + 1);
+	i = -1;
+	while (++i < s_line)
+		aux[i] = line[i];
+	i--;
+	while (++i - s_line < ft_strlen(buf) && buf[i - s_line] != '\n')
+		aux[i] = buf[(i) - s_line];
+	if (buf[i - s_line] == '\n')
+		aux[i] = '\n';
+	aux[s_line + getendposline(buf)] = '\0';
+	i = -1;
+	aux_len = getendposline(buf);
+	while (++i < (ft_strlen(buf) - aux_len))
+		buf[i] = buf[aux_len + i];
+	buf[ft_strlen(buf) - aux_len] = '\0';
+	if (ft_strlen(aux) > 0 && aux[ft_strlen(aux) - 1] != '\n')
+		*buf = '\0';
+	if (line)
+		free(line);
 	return (aux);
 }

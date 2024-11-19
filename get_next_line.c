@@ -6,7 +6,7 @@
 /*   By: rafael <rafael@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:05:54 by rafael            #+#    #+#             */
-/*   Updated: 2024/11/18 13:13:28 by rafael           ###   ########.fr       */
+/*   Updated: 2024/11/19 23:54:08 by rafael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ char	*get_next_line(int fd)
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
-		line = ft_joinmod(line, buffer);
+		line = ft_joinmod(line, buffer, ft_strlen(line));
 		if (!line)
 			return (NULL);
-		if (*line != '\0' && line[ft_strlen(line) - 1] == '\n')
+		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
 			break ;
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read >= 0)
+		if (bytes_read > 0)
 			buffer[bytes_read] = '\0';
-		if ((bytes_read == 0 && *line == '\0') || bytes_read < 0)
+		if ((bytes_read == 0 && ft_strlen(line) == 0) || bytes_read < 0)
 		{
 			*buffer = '\0';
 			free(line);
