@@ -6,15 +6,15 @@
 /*   By: rafael <rafael@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:32:45 by rafael            #+#    #+#             */
-/*   Updated: 2024/11/20 00:00:31 by rafael           ###   ########.fr       */
+/*   Updated: 2024/11/20 00:13:28 by rafael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	getendposline(char *str)
+size_t	getendposline(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -41,31 +41,31 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_joinmod(char *line, char *buf, size_t s_line)
+char	*ft_joinmod(char *line, char *buf)
 {
 	char	*aux;
 	size_t	pos;
 	size_t	i;
+	size_t	len_line;
 
-	aux = (char *)malloc(sizeof(char) * (s_line) + getendposline(buf) + 1);
+	len_line = ft_strlen(line);
+	aux = (char *)malloc(sizeof(char) * (len_line) + getendposline(buf) + 1);
 	if (!aux)
 		return (free(line), NULL);
 	i = -1;
-	while (++i < s_line)
+	while (++i < len_line)
 		aux[i] = line[i];
 	i--;
-	while (++i - s_line < ft_strlen(buf) && buf[i - s_line] != '\n')
-		aux[i] = buf[(i) - s_line];
-	if (buf[i - s_line] == '\n')
+	while (++i - len_line < getendposline(buf))
+		aux[i] = buf[(i) - len_line];
+	if (buf[i - len_line] == '\n')
 		aux[i] = '\n';
-	aux[s_line + getendposline(buf)] = '\0';
+	aux[len_line + getendposline(buf)] = '\0';
 	pos = getendposline(buf);
 	i = -1;
 	while (++i < (ft_strlen(buf) - pos))
 		buf[i] = buf[pos + i];
 	buf[ft_strlen(buf) - pos] = '\0';
-	if (ft_strlen(aux) > 0 && aux[ft_strlen(aux) - 1] != '\n')
-		*buf = '\0';
-	free(line);
-	return (aux);
+	buf[i] = '\0';
+	return (free(line), aux);
 }
