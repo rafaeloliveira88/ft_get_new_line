@@ -6,7 +6,7 @@
 /*   By: rafael <rafael@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:32:45 by rafael            #+#    #+#             */
-/*   Updated: 2024/11/19 23:57:18 by rafael           ###   ########.fr       */
+/*   Updated: 2024/11/20 00:00:31 by rafael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*ft_joinmod(char *line, char *buf, size_t s_line)
 	size_t	i;
 
 	aux = (char *)malloc(sizeof(char) * (s_line) + getendposline(buf) + 1);
+	if (!aux)
+		return (free(line), NULL);
 	i = -1;
 	while (++i < s_line)
 		aux[i] = line[i];
@@ -57,14 +59,13 @@ char	*ft_joinmod(char *line, char *buf, size_t s_line)
 	if (buf[i - s_line] == '\n')
 		aux[i] = '\n';
 	aux[s_line + getendposline(buf)] = '\0';
-	i = -1;
 	pos = getendposline(buf);
+	i = -1;
 	while (++i < (ft_strlen(buf) - pos))
 		buf[i] = buf[pos + i];
 	buf[ft_strlen(buf) - pos] = '\0';
 	if (ft_strlen(aux) > 0 && aux[ft_strlen(aux) - 1] != '\n')
 		*buf = '\0';
-	if (line)
-		free(line);
+	free(line);
 	return (aux);
 }
