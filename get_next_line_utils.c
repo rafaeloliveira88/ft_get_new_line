@@ -6,13 +6,13 @@
 /*   By: rafael <rafael@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:32:45 by rafael            #+#    #+#             */
-/*   Updated: 2024/11/20 09:07:52 by rafael           ###   ########.fr       */
+/*   Updated: 2024/11/20 09:09:12 by rafael           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	getlen(char *str)
+size_t	ft_getlen(char *str)
 {
 	size_t	i;
 
@@ -48,7 +48,7 @@ char	*ft_joinmod(char *line, char *buf)
 	size_t	i;
 	size_t	len_line;
 
-	len_buf = getlen(buf);
+	len_buf = ft_getlen(buf);
 	len_line = ft_strlen(line);
 	aux = (char *)malloc(sizeof(char) * (len_line) + len_buf + 1);
 	if (!aux)
